@@ -1,5 +1,8 @@
 import { SieveData, HydrometerResult } from '../types';
 import { generateSievePdf } from '../utils/sievePdfGenerator';
+import { generateSieveExcel } from '../utils/excelGenerator';
+import { generateSieveLayoutExcel } from '../utils/excelLayoutGenerator';
+import { saveSieveFile, loadSieveFile } from '../utils/fileStorage';
 import GrainSizeChart from './GrainSizeChart';
 
 interface Props {
@@ -157,6 +160,21 @@ export default function SieveForm({ data, onChange }: Props) {
       <div className="form-actions">
         <button className="btn-primary" onClick={handleGeneratePdf}>
           Generate PDF (Fig 10-12: Sieve Analysis)
+        </button>
+        <button className="btn-secondary" onClick={() => generateSieveExcel(data)}>
+          Export Excel (.xlsx)
+        </button>
+        <button className="btn-secondary" onClick={() => generateSieveLayoutExcel(data)}>
+          Export Excel (Layout)
+        </button>
+        <button className="btn-secondary" onClick={() => saveSieveFile(data)}>
+          Save to File
+        </button>
+        <button className="btn-secondary" onClick={async () => {
+          const loaded = await loadSieveFile();
+          if (loaded) onChange(loaded);
+        }}>
+          Load from File
         </button>
       </div>
     </div>

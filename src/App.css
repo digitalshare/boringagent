@@ -245,6 +245,10 @@ td select:focus {
   padding-top: 16px;
   border-top: 2px solid #e0e4e8;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
 }
 
 .btn-primary {
@@ -265,6 +269,28 @@ td select:focus {
 }
 
 .btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  padding: 14px 24px;
+  background: white;
+  color: #1a3a5c;
+  border: 2px solid #2c5f8a;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.btn-secondary:hover {
+  background: #eef4f9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 58, 92, 0.15);
+}
+
+.btn-secondary:active {
   transform: translateY(0);
 }
 

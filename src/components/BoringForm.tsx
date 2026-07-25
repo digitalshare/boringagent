@@ -1,5 +1,8 @@
 import { BoringData, SoilLayer, SPTRecord, SampleRecord, RockLayer, CoreRun } from '../types';
 import { generateBoringPdf } from '../utils/boringPdfGenerator';
+import { generateBoringExcel } from '../utils/excelGenerator';
+import { generateBoringLayoutExcel } from '../utils/excelLayoutGenerator';
+import { saveBoringFile, loadBoringFile } from '../utils/fileStorage';
 
 interface Props {
   data: BoringData;
@@ -360,6 +363,21 @@ export default function BoringForm({ data, onChange }: Props) {
       <div className="form-actions">
         <button className="btn-primary" onClick={handleGeneratePdf}>
           Generate PDF ({data.boringType === 'soil' ? 'Fig 3-5: Soil Boring Log' : 'Fig 3-7: Core Boring Log'})
+        </button>
+        <button className="btn-secondary" onClick={() => generateBoringExcel(data)}>
+          Export Excel (.xlsx)
+        </button>
+        <button className="btn-secondary" onClick={() => generateBoringLayoutExcel(data)}>
+          Export Excel (Layout)
+        </button>
+        <button className="btn-secondary" onClick={() => saveBoringFile(data)}>
+          Save to File
+        </button>
+        <button className="btn-secondary" onClick={async () => {
+          const loaded = await loadBoringFile();
+          if (loaded) onChange(loaded);
+        }}>
+          Load from File
         </button>
       </div>
     </div>
